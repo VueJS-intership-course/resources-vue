@@ -8,7 +8,7 @@
     </a>
   </div>
   page is: {{ page }}
-  <CoolPaginator 
+  <paginator 
      :entriesCount="entries.length"
      v-model:currentPage="page"
      @update:currentPage="test"
@@ -20,7 +20,7 @@ import CoolPaginator from './components/CoolPaginator.vue'
 
 export default {
   components: {
-    // [CoolPaginator.name] : CoolPaginator
+    [CoolPaginator.name] : CoolPaginator
   },
   data: () => ({
     page: 1
