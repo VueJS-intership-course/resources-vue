@@ -8,18 +8,30 @@
     </a>
   </div>
   page is: {{ page }}
-  <paginator 
+  <paginator
+    :pageItemsAttrs="{
+      class: 'class-1',
+      onClick: customOnClick // @click.once
+    }"
      :entriesCount="entries.length"
      v-model:currentPage="page"
      @update:currentPage="test"
-  />
+     class="class-1"
+  >
+    <template #append="propsData">
+      <span>Page {{ propsData.currentPage }} of {{ propsData.totalPages }}</span>
+      <button :class="{'red' : propsData.currentPage % 2 === 0}" :disabled="propsData.isNextDisabled" @click="propsData.fnMovePage(+1)">custom next</button>
+    </template>
+  </paginator>
 </template>
 
 <script>
 import CoolPaginator from './components/CoolPaginator.vue'
+import TestComponent from '@/components/TestComponent.vue'
 
 export default {
   components: {
+    TestComponent,
     [CoolPaginator.name] : CoolPaginator
   },
   data: () => ({
@@ -31,6 +43,9 @@ export default {
     },
     test(e){ 
       console.warn(e)
+    },
+    customOnClick() {
+      alert('once')
     }
   },
   computed: {
@@ -53,5 +68,13 @@ export default {
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+
+.red {
+  background-color: red;
+}
+
+:deep(.class-1) {
+  background: blue;
 }
 </style>

@@ -7,5 +7,14 @@ export default defineConfig({
   base: './',
   build: {
     assetsDir: './assets/'
+  },
+  server: {
+    open: true,
+  },
+  resolve: {
+    alias: {
+      '@': './src/'
+    }
   }
+  
 })
